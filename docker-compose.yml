@@ -1,0 +1,38 @@
+version: '3'
+services:
+  core:
+    build:
+      context: .
+      args:
+        GID: ${GROUP_ID}
+        UID: ${USER_ID}
+    command: bash
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/home/mobydick/backend
+    ports:
+      - ${PORT}:3000
+    depends_on:
+      - postgres
+    networks:
+      - ifaf_local
+  postgres:
+    image: postgres:11.5
+    restart: always
+    ports:
+      - ${POSTGRES_PORT}:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ifaf_local
+volumes:
+  postgres_data:
+    external:
+      name: ifaf_backend_postgres_data
+networks:
+  ifaf_local:
+    external: true
