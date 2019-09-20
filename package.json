@@ -1,7 +1,7 @@
 {
   "name": "ifaf-backend",
   "version": "0.0.1",
-  "description": "Project IFAF: Backend",
+  "description": "Unternehmen IFAF: Backend",
   "author": "el que m'est",
   "private": true,
   "scripts": {
